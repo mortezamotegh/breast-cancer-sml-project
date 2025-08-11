@@ -111,5 +111,11 @@ You may view and reference the code, but **copying, modifying, or redistributing
 If you wish to reuse any part of the code, please contact me to request permission.
 
 
+[![pages-build-deployment](https://github.com/mortezamotegh/breast-cancer-sml-project/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/mortezamotegh/breast-cancer-sml-project/actions/workflows/pages/pages-build-deployment)
+[![contributors](https://img.shields.io/github/contributors/mortezamotegh/breast-cancer-sml-project.svg)](https://github.com/mortezamotegh/breast-cancer-sml-project/graphs/contributors)
+[![GitHub release](https://img.shields.io/github/v/release/mortezamotegh/breast-cancer-sml-project.svg)](https://GitHub.com/mortezamotegh/breast-cancer-sml-project/releases/)
+[![GitHub license](https://img.shields.io/github/license/mortezamotegh/breast-cancer-sml-project.svg)](https://github.com/mortezamotegh/breast-cancer-sml-project/blob/main/LICENSE)
+
+
 
 
