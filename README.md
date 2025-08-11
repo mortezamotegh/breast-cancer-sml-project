@@ -12,7 +12,20 @@ The repository contains:
 
 ## 📊 Dataset Overview
 
-Each row in the dataset represents a breast mass sample, with features computed from the FNA image of the cell nuclei.
+Fine-needle aspiration (FNA) is a medical procedure healthcare providers use to collect cell samples from a suspicious lump or abnormal area of the body.  
+It’s also called a *fine-needle biopsy*.  
+FNA involves extracting cells, tissue, and sometimes fluids using a thin needle and syringe.  
+The collected sample is then prepared and analyzed — in this case, **microscopic images of the extracted cells are processed to calculate diagnostic features**.
+
+![Fine Needle Aspiration](images/fna.jpg)
+
+The dataset contains measurements from **fine-needle aspiration (FNA)** images of breast mass cell nuclei.  
+It is widely used in machine learning research to develop models that can distinguish between **benign** (non-cancerous) and **malignant** (cancerous) tumors.  
+
+The dataset includes **569 samples**, each described by **30 numeric features** derived from 10 original cell nucleus characteristics.  
+These features are designed to capture size, shape, texture, and complexity of the cell nuclei — all of which can be indicators of malignancy.
+
+
 
 ### Features
 
@@ -80,6 +93,17 @@ breast-cancer-sml-project/
 This project is for educational purposes as part of a coursework submission.
 Dataset used is from the UCI Machine Learning Repository:
 https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
+
+---
+
+## 📌 Copyright & Code Usage
+
+© 2025 Morteza Motegh. All rights reserved.  
+
+The source code in this repository is provided for educational purposes as part of my coursework.  
+You may view and reference the code, but **copying, modifying, or redistributing it in any form without explicit permission is prohibited**.  
+
+If you wish to reuse any part of the code, please contact me to request permission.
 
 
 
