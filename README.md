@@ -4,10 +4,13 @@ This project is part of my Statistical Machine Learning coursework.
 It analyzes **breast cancer diagnosis** using features extracted from cell nuclei in fine needle aspiration (FNA) images of breast masses.
 
 The repository contains:
-- **`report.html`** – A redacted HTML report (first 5 lines of code shown, full code available in `src/`).
-- **`src/`** – Source code for data processing, analysis, and model building.
+- **`report.html`** – A redacted HTML report where the code chunks show placeholders instead of full implementation; figures and outputs are not included.
+- **`src/`** – Source code folder with function signatures and structure only; full code available upon request.
 - **Dataset description** – See below for feature explanations.
 
+```
+For privacy reasons, the full code and results are not included in this public version. Please contact me to request access to the complete project.
+````
 ---
 
 ## 📊 Dataset Overview
