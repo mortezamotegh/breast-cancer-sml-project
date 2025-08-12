@@ -74,7 +74,7 @@ breast-cancer-sml-project/
 #### 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/mortezamotegh/breast-cancer-sml-project.git
+   git clone https://github.com/tezamo/breast-cancer-sml-project.git
    cd breast-cancer-sml-project
    ```
 
@@ -107,7 +107,7 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
 
 ## 📌 Copyright & Code Usage
 
-© 2025 Morteza Motegh. All rights reserved.  
+© 2025 tezamo. All rights reserved.  
 
 The source code in this repository is provided for educational purposes as part of my coursework.  
 You may view and reference the code, but **copying, modifying, or redistributing it in any form without explicit permission is prohibited**.  
@@ -115,10 +115,10 @@ You may view and reference the code, but **copying, modifying, or redistributing
 If you wish to reuse any part of the code, please contact me to request permission.
 
 
-[![pages-build-deployment](https://github.com/mortezamotegh/breast-cancer-sml-project/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/mortezamotegh/breast-cancer-sml-project/actions/workflows/pages/pages-build-deployment)
-[![contributors](https://img.shields.io/github/contributors/mortezamotegh/breast-cancer-sml-project.svg)](https://github.com/mortezamotegh/breast-cancer-sml-project/graphs/contributors)
-[![GitHub release](https://img.shields.io/github/v/release/mortezamotegh/breast-cancer-sml-project.svg)](https://GitHub.com/mortezamotegh/breast-cancer-sml-project/releases/)
-[![GitHub license](https://img.shields.io/github/license/mortezamotegh/breast-cancer-sml-project.svg)](https://github.com/mortezamotegh/breast-cancer-sml-project/blob/main/LICENSE)
+[![pages-build-deployment](https://github.com/tezamo/breast-cancer-sml-project/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/tezamo/breast-cancer-sml-project/actions/workflows/pages/pages-build-deployment)
+[![contributors](https://img.shields.io/github/contributors/tezamo/breast-cancer-sml-project.svg)](https://github.com/tezamo/breast-cancer-sml-project/graphs/contributors)
+[![GitHub release](https://img.shields.io/github/v/release/tezamo/breast-cancer-sml-project.svg)](https://GitHub.com/tezamo/breast-cancer-sml-project/releases/)
+[![GitHub license](https://img.shields.io/github/license/tezamo/breast-cancer-sml-project.svg)](https://github.com/tezamo/breast-cancer-sml-project/blob/main/LICENSE)
 
 
 
