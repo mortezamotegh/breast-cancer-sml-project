@@ -94,12 +94,13 @@ breast-cancer-sml-project/
 ## 📋View the Report
 
 You can see the full rendered report here:  
-[Open Report](https://mortezamotegh.github.io/breast-cancer-sml-project/report.html)
+[Open Report](https://tezamo.github.io/breast-cancer-sml-project/report.html)
 
 
 ## 📜 License
 This project is for educational purposes as part of a coursework submission.
-Dataset used is from the UCI Machine Learning Repository:
+Dataset used is from the UCI Machine Learning Repository:  
+
 https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
 
 ---
