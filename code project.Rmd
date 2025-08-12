@@ -1,0 +1,1042 @@
+---
+title: "Coursework SML"
+author: "Morteza Motegh"
+output:
+  html_document:
+    fig_width: 10
+    theme: spacelab
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  word_document:
+    toc: yes
+    toc_depth: '3'
+  pdf_document: default
+  html_notebook:
+    fig_width: 10
+    theme: spacelab
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+<script>
+$(document).ready(function() {
+  $items = $('div#TOC li');
+  $items.each(function(idx) {
+    num_ul = $(this).parentsUntil('#TOC').length;
+    $(this).css({'text-indent': num_ul * 10, 'padding-left': 0});
+  });
+
+});
+</script>
+
+```{r setup, warning=FALSE, message=FALSE, echo=FALSE}
+  # Full implementation removed for privacy
+```
+
+# 1. Introduction
+
+  The data includes Features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass.
+  They describe characteristics of the cell nuclei present in the image.
+  
+   Attribute Information:
+  
+    1. ID number  
+    2. Diagnosis (M = malignant, B = benign)  
+    3-32. Ten real-valued features are computed for each cell nucleus:  
+       - a ) radius (mean of distances from center to points on the perimeter)  
+       - b ) texture (standard deviation of gray-scale values)  
+       - c ) perimeter  
+       - d ) area  
+       - e ) smoothness (local variation in radius lengths)  
+       - f ) compactness (perimeter^2 / area - 1.0)  
+       - g ) concavity (severity of concave portions of the contour)  
+       - h ) concave points (number of concave portions of the contour)  
+       - i ) symmetry  
+       - j ) fractal dimension ("coastline approximation" - 1)
+  
+  
+   The mean, standard error and "worst" or largest (mean of the three largest values) of these features were computed
+  for each image, resulting in 30 features.
+  
+> [! IMPORTANT ]  
+  Missing attribute values: none  
+  Class distribution: 357 benign, 212 malignant
+
+# 2. Data Preparation
+
+## 2.1 Data Setup
+
+```{r, results='hide'}
+  # Full implementation removed for privacy
+```
+
+## 2.2 Data Preparation
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+# 3. Logistic Regression
+
+```{r, class.output="bg-warning"}
+  # Full implementation removed for privacy
+```
+
+<div style="background-color: #ffcccb; border-left: 6px solid #f44336; padding: 10px;">
+  <strong>WARNING</strong>
+  <p>The warning **"glm.fit: fitted probabilities numerically 0 or 1 occurred"** appears when the predictions are very confident, i.e. the predicted probabilities for some observations are very close to 0 or very close to 1. This happens because the logistic regression model is assigning probabilities at the extremes (0 or 1) even though logistic regression is supposed to estimate probabilities between 0 and 1. This can happen due to the numerical properties of the algorithm or the distribution of the data.</p>
+  <p>It often happens when the data is linearly separable or nearly separable in the feature space. In that case the model is very confident in its predictions for some data points and assigns extreme probabilities (0 or 1). While this is not an error per se, it means the model is predicting with extreme certainty which could mean overfitting or the model has found a clear separation.</p>
+  <p>When the original features allow for perfect separation of the two classes the logistic regression model can get overconfident and assign fitted probabilities of 0 or 1 to some observations. This is more common in small datasets or when the classes are highly separable.</p>
+  <p>Logistic regression uses the Newton-Raphson algorithm to find maximum likelihood estimates. When the probabilities are very close to 0 or 1 the log-likelihood function flattens and the algorithm struggles to converge properly.</p>
+</div>
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+**Interpretation:**
+
+1. All p-values are **1**, which shows that none of the predictors are statistically significant in this model. This could be due to several reasons such as multicollinearity which I mentioned in the warning message too.
+
+2. Null Deviance which Measures the goodness of fit for a model without any predictors (just the intercept) is **5.2728e+02** with **398** degrees of freedom.
+
+3. Residual Deviance Measures the goodness of fit for the model with predictors which is extremely low (**4.815e-10** on **368** degrees of freedom) . This indicates that the model has an almost perfect fit.
+
+4. AIC (Akaike Information Criterion) which is a measure of the model quality is **62** .Lower values generally indicate a better model fit. 
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+> The `Pearson Residuals` measure the gap between the actual and predicted values, normalized by the variance of the model. In the zero area, the residuals should ideally be spread equally.
+
+
+## 3.1 Forecasting and Validation
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+**Confusion Matrix:**
+
+- True Positive (Reference B, Prediction B): In  **<font color="red">102</font>** cases, the model correctly predicted benign (B) tumors.  
+- False Negative (Reference B, Prediction M): **<font color="red">5</font>** B cases in model incorrectly classified as M.
+- False Positive (Reference M, Prediction B): **<font color="red">4</font>** M cases in model incorrectly classified as B. 
+- True Negative (Reference M, Prediction M):  **<font color="red">59</font>** cases where the model correctly predicted Malignant (M) tumours.
+
+**Key Metrics:**
+
+1. **Accuracy**:  **<font color="red">0.9471 (94.71%)</font>**, `[(TP + TN) / (TP + TN + FP + FN)]` 
+
+    **94.71%** of the predictions were correct with the **95%** of confidence interval.
+
+2. **Kappa**:  **<font color="red">0.8869 </font>**, `[(observed accuracy - expected accuracy) / (1 - expected accuracy)]`  
+
+    Kappa is how much better the model is than random. **0.8869** is very good.
+
+3. **Sensitivity**:  **<font color="red">0.9533 (95.33%)</font>**, `[TP / (TP + FN)]`  
+
+    Sensitivity is the proportion of actual positives (Benign) that were correctly predicted. **95.33%** of Benign tumours were correctly identified.
+
+4. **Specificity**:  **<font color="red">0.9365 (93.65%)</font>**, `[TN / (TN + FP)]`  
+
+    Specificity is the proportion of actual negatives (Malignant) that were correctly predicted. **93.65%** of Malignant tumours were correctly identified. 
+
+5. **Positive Predictive Value **:  **<font color="red">0.9623 (96.23%)</font>**, `[TP / (TP + FP)]`
+
+    This is the proportion of predicted Benign tumours that are actual Benign **96.23%** of the time when the model predicts a tumour is Benign it is correct.
+
+6. **Negative Predictive Value **:  **<font color="red">0.9219 (92.19%)</font>**, `[TN / (TN + FN)]`
+
+    This is the proportion of predicted Malignant tumours that are actual Malignant **92.19%** of the time when the model predicts a tumour is Malignant it is correct.
+
+7. **Prevalence**:  **<font color="red">0.6294 (62.94%)</font>**  
+
+    This represents the proportion of the dataset that belongs to the positive class (B).
+
+
+8. **Detection Rate**:  **<font color="red">0.60 (60%)</font>**  
+
+    The proportion of correctly identified positive class out of the entire dataset.
+
+9. **Detection Prevalence**:  **<font color="red">0.6235 (62.35%)</font>**  
+
+    The proportion of the dataset that was predicted to be positive class by the model.
+
+10. **Balanced Accuracy**:  **<font color="red">0.9449 (94.49%)</font>**, `[(Sensitivity + Specificity) / 2]`  
+
+    Balanced Accuracy is the average of sensitivity and specificity. Here it's **94.49%** so the model is good on both classes.
+
+11. **McNamar’s Test P-Value**:  **<font color="red">1</font>**  
+
+    This test checks if there is a significant difference between the two types of errors (False Positives and False Negatives). **1** means no significant difference so the model's errors are balanced.
+
+**Summary:** 
+
+- **Overall Performance:**  The model shows a high accuracy of **94.71%**, with good sensitivity **95.33%** and specificity **93.65%**, indicating that it is effective at classifying both benign and malignant tumors.
+
+- **Balanced Performance:** The Kappa value of **0.8869** and the balanced accuracy of **94.49** suggest that the model performs well across both classes, and the errors are reasonably balanced.
+
+
+## 3.2 Visualizing the Results
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+<div style="background-color: #ccffcc; border-left: 6px solid #4CAF50; padding: 10px;">
+  <strong>INFORMATION</strong>
+  
+  <p><strong>Settings: control = B, case = M :</strong><br>
+  Model has set your target variable, Diagnosis, so that “B” (Benign) is the control (Positive class) and “M” (malignant) is the case (Negative class). This means the factor levels are set for binary classification.</p>
+  <p><strong>Settings: controls < cases :</strong><br>
+  This is related to ROC curve. It means the ROC curve is being calculated with the assumption that the “control” group (Benign cases) has lower predicted probabilities than the “case” group (Malignant cases). Since the direction of the ROC curve calculation is based on the ordering of levels. In this case “B” (Benign) has lower probability than "M" (malignant).</p>
+</div>
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+**Axes:**
+
+- **X-axis (1 - Specificity)**: ``[FP / (TN + FP)]`` 
+
+    False Positive Rate (FPR) - proportion of actual negatives (Malignant) that were incorrectly classified as positives (Benign). 
+
+- **Y-axis (Sensitivity)**:  
+
+    True Positive Rate (TPR) or Recall or Sensitivity - proportion of actual positives (Benign) that were correctly classified.
+
+**Key Metrics:**  
+
+1. **ROC Curve (Blue Line):**  
+
+    ROC curve plots TPR (Sensitivity) against " 1 - Specificity " for different threshold values which is Area Under the Curve. This shows how well the model separates the two classes (Benign and Malignant).
+
+2. **Diagonal Line (Red Dashed Line):**  
+
+    Diagonal line represents a random classifier that makes predictions with no predictive power. If the ROC curve were close to this line, the model would be no better than random guessing.
+
+3. **AUC= 0.964**  
+
+    AUC (Area Under the Curve) is a single number that summarizes the performance of the model. It’s the probability that a randomly chosen positive instance (Benign) is ranked higher by the model than a randomly chosen negative instance (Malignant).AUC of **0.964** means the model has excellent discrimination. AUC of **1.0** means perfect classification, **0.5 means** no discriminatory power (random guessing). **0.964** means the model is very good at separating the two classes.
+
+**Summary:**  
+
+The ROC curve and AUC value show the logistic regression model is highly successful at this classification problem. The model has a high ability to recognize between benign and malignant cases, making it a useful instrument for predicting the kind of breast tumours based on the information presented.
+
+
+## 3.3 Model Summary
+
+```{r, class.output="bg-info"}
+  # Full implementation removed for privacy
+```
+
+## 3.4 Tuned LR
+
+
+To solve the multicoliniarity and warning problem, we use regularization.Since logistic regression doesn’t have many hyperparameters to tune, I focus on regularization using the glmnet package. Regularization helps prevent the model from overfitting by adding a penalty term to the cost function. There are several types of regularized regression:
+
+1. Lasso Regression: Adds an L1 penalty term to the cost function.
+
+2. Ridge Regression: Adds an L2 penalty term to the cost function.
+
+3. Elastic Net Regression: Combines both L1 and L2 penalty terms.
+
+The main function in the **glmnet** package is `glmnet` which fits a generalized linear model with regularization. The function requires several arguments including the response variable (y), the predictor variables (X) and the type of regularization (L1 or L2).
+
+The syntax for the function is as follows:
+
+glmnet(X, y, family = "binomial", alpha = 1, lambda = NULL)
+
+Where :
+
+- X is the matrix of predictor variables.
+
+- y is the response variable.
+
+- family specifies the type of response variable (e.g., Gaussian, binomial, Poisson).
+
+- alpha indicates the type of regularization (1 for L1, 0 for L2).
+
+- lambda specifies the strength of the regularization penalty.
+
+For my code, I used Lasso (L1) regularization (alpha = 1 ). The glmnet function requires the features to be provided as a matrix and the target (response) variable as a vector. After installing and loading the necessary packages, I prepared the data for `glmnet` by creating a feature matrix (x_train_glm) and a response vector (y_train_glm). I excluded the `diagnosis` column from the feature matrix since `glmnet` does not use the  formula interface.
+
+In contrast with  `glm` in R that handles the response and predictor variables via the formula interface. in `glm` When you specify `diagnosis ~ .`, the `.` means all other columns in the dataset, `glm` treats `diagnosis` as the response and the rest as predictors. So we don’t need to manually exclude the diagnosis column in `glm`.
+
+To find the optimal value of lambda, I used cross-validation with `cv.glmnet`.Once the best lambda was identified, I used it to make predictions on the test set.
+
+
+
+### 3.4.1 Multicollinearity Check 
+
+```{r }
+  # Full implementation removed for privacy
+```
+
+
+
+> There is very high correlation (multicollinearity) among several variables, especially among: 
+>
+> - `radius_mean`, `perimeter_mean`, and `area_mean` (all > 0.95)
+>
+> - `concave.points_mean` and other variables like perimeter_mean and `concavity_mean` (all > 0.84)
+>
+> - `radius_worst`, `perimeter_worst`, and `area_worst` have very high correlation (all > 0.95)
+>
+> High correlation can cause multicollinearity in the model which can lead to high variance and unreliable coefficients
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+> VIF ( Variance Inflation Factor) shows severe multicollinearity for several variables, especially `radius_mean`, `perimeter_mean`, and `area_mean`. high multicollinearity can inflate standard errors and lead to unreliable estimates.I will use a regularization method  (Lasso regression ) to reduce the impact.
+
+
+
+### 3.4.2 GLM with lasso (glmnet) 
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+**Axes:**
+
+- **X-axis (Log(λ))**:  
+
+    Lambda controls the amount of regularization: higher values of lambda means more shrinkage of coefficients towards zero, lower values of lambda means less shrinkage. Log(lambda) is negative so actual lambda values are small (log of a number less than 1 is negative).  
+    
+- **Y-axis (Binomial Deviance)**:  
+
+    Lower binomial deviance means better
+
+**Key Metrics:**  
+
+1. **Red Dots: Cross-Validation Results:**  
+
+    Red dots are cross-validated deviance for each lambda. Each dot is for a different lambda used during cross-validation. Lower deviance (lower on y-axis) is better as it means the model fits the data better.
+
+2. **Error Bars: Standard Error:**  
+
+    Vertical lines around each red dot are error bars which are the standard error around the cross-validation results at each lambda. Shorter error bars means more stable cross-validation performance.
+
+3. **Dashed Vertical Lines:**  
+
+    Two dashed vertical lines on the plot:
+
+    - Left dashed line: lambda.min, the value of lambda that gives the minimum binomial deviance (best fit). This is the lambda you would choose if you want the best performance and it minimizes the cross-validation error.
+
+    - Right dashed line: lambda.1se, the largest lambda such that the error is within one standard error of the minimum error. This lambda is more regularized (More coefficients decreased in direction of zero.) and is preferred if you want a simpler model that is more robust to overfitting.
+
+**Summary:**  
+
+- Left dashed line (around log(λ) ≈ -6) is lambda.min, the value where the model has the lowest binomial deviance. This is the optimal value for minimizing error.
+
+- Right dashed line is lambda.1se (one standard error), where I exchange a bit of accuracy for a simpler model that will generalize better.
+
+- Choose between lambda.min and lambda.1se depending on what the researcher wants:
+
+    - For the best performance,`lambda.min` should be used.
+
+    - For a more regularized mode, `lambda.1se` should be used.
+
+
+### 3.4.3 Forecasting and Validation
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+### 3.4.4 Model Summary
+
+```{r, class.output="bg-info"}
+  # Full implementation removed for privacy
+```
+
+# 4. Decision Trees
+
+## 4.1 Train the Decision Tree
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+## 4.2 Visualizing the Decision Tree
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+> The `radius_worst < 17` is a strong initial determinant in the classification Since Most benign cases fall into the this category category. 
+>
+Moreover, For cases where the `radius_worst` is smaller than **17**, the number of `concave points_worst` is critical. Low concave points typically indicate a Benign tumor, whereas higher concave points suggest malignancy.
+>
+- When `radius_worst > 17`the model classifies **125** samples as Malignant (M) and **5** samples as Benign (B). This accounts for **33%** of the data at this point. 
+>
+- When `radius_worst < 17` and `concave.points_worst < 0.16`, the model classifies **244** samples as Benign (B) and **8** samples as Malignant (M). This accounts for **63%** of the data at this point.
+>
+- When `radius_worst < 17` and `concave.points_worst >= 0.16`, the model classifies **1** sample as Benign (B) and **16** samples as Malignant (M), making up **4%** of the data at this node.
+
+
+
+## 4.3 Forecasting and Validation
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+## 4.4 Visualizing the Results
+
+
+```{r,echo=FALSE}
+  # Full implementation removed for privacy
+```
+
+## 4.5 3D Scatter Plot
+
+> In order to understand the combinations of **minimum observations per node (minsplit)**, **tree depth (maxdepth)** and **complexity parameter (cp)** for a better prediction, we can make a loop for training the Decision Tree using different parameters, saving each model's accuracy, and plotting the results in a 3D scatter plot.
+
+### 4.5.1 Install Essential Libraries
+
+```{r,results='hide'}
+  # Full implementation removed for privacy
+```
+
+### 4.5.2 Define the grid
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+### 4.5.3 Loop OV Parameter CP
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+### 4.5.4 Display the Result
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+**Axes:**
+
+- **X-axis (minsplit)**:  
+
+    The minimum number of observations that must be present in a node for a split to be attempted. It ranges from **2** to **10** in this plot.  
+
+- **Y-axis (maxdepth)**:  
+
+    The maximum depth of the tree. The values range from **3** to **7**.  
+
+- **Z-axis (cp)**:   
+
+    The complexity parameter which controls the size of the decision tree . The smaller value of cp indicates a more larger tree. The range here is from **0.01** to **0.10**.
+
+**Points and Color Gradient:**  
+
+The colors of the points represent the accuracy of the model for each parameter combination. The color gradient ranges from blue (lower accuracy) to red (higher accuracy).
+
+**Interpretation:**  
+
+- Lower cp values (closer to **0.01**) combined with moderate to higher maxdepth (such as **5** or **7**) and lower to moderate minsplit values (around **2** or **4**) leads to higher accuracy.  
+
+- Higher cp values (closer to **0.10**) usually leads to lower accuracy, especially if combined with deeper trees (max depth of **7**). It indicates that increasing tree complexity without sufficient regularization (higher cp) can lead to overfitting, decreasing the model's capacity for generalization to unseen data.
+
+
+
+## 4.6 Model Summary
+
+
+```{r, class.output="bg-info"}
+  # Full implementation removed for privacy
+```
+
+
+
+# 5. Random Forest
+
+## 5.1 Train the Random Forest
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+**Key Metrics:**
+
+- **Number of Trees:** **<font color="red">500</font>**
+  
+    The model built an ensemble of **500** decision trees. The final prediction is made based on the majority vote of all trees. A higher number of trees generally increases the robustness and stability of the model, though it also increases computational time.
+
+- **No. of Variables Tried at each Split:** **<font color="red">5</font>**  
+
+    At each node of a tree, the algorithm randomly selected **5** features (out of the total features) to consider for splitting the data. This randomness is helping to reduce overfitting by ensuring that individual trees are not too similar to one another.
+
+- **OOB Error Rate:** **<font color="red">4.26%</font>**  
+
+    Indicates that approximately **4.26%** of the predictions made by the Random Forest model were incorrect on the training data.
+    
+- **Class Error Rates:** **<font color="red">3.6%</font>**  
+
+    The model indicates that **3.6%** of Benign cases were misclassified as Malignant and 5.3% of Malignant cases  misclassified  as Benign 
+
+**Confusion Matrix:**
+
+- True Positives (TP): **<font color="red">241</font>** Number of Benign tumors correctly classified as Benign.  
+- False Negatives (FN): **<font color="red">8</font>** number of B cases in model incorrectly classified as M.  
+- False Positives (FP): **<font color="red">9</font>** number of M cases in model incorrectly classified as B.  
+- True Negatives (TN): **<font color="red">141</font>** Number of malignant tumors correctly classified as malignant.
+
+  
+## 5.2 Forecasting and Validation
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+## 5.3 ROC Curve for RF
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+## 5.4 Model Summary
+
+
+```{r, class.output="bg-info"}
+  # Full implementation removed for privacy
+```
+
+## 5.5 Hyperparameter Tuning
+
+>
+Random Forest includes multiple important hyperparameters that can be changed to increase model performance. The most important ones are:
+>
+**mtry:** The number of features to consider for each split.  
+>
+**Ntree:** The number of trees in the forest.  
+>
+**Nodesize:** The minimum size of terminal nodes.  
+>
+We'll use caret to run a cross-validated grid search for these parameters.
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+**interpretation:**
+
+- The data was split into **5** parts and the model was trained **5** times, each time using **4** parts for training and **1** part for testing.
+
+- mtry = 4 was chosen as the best model based on the highest ROC (0.9906207 ). This means that considering 4 features at each split was the best for distinguishing between benign and malignant.So a simpler model (considering fewer features at each split) was better in this particular classification task, maybe because it reduces overfitting or makes more robust predictions.
+
+
+
+
+## 5.6 Evaluate the Tuned Model
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+## 5.7 Visualizing the Results
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+## 5.8 Tuned Summary
+
+
+
+```{r, class.output="bg-info"}
+  # Full implementation removed for privacy
+```
+
+
+
+## 5.9 RF vs. Tuned RF
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+## 5.10 3D Scatter Plot
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+**interpretation:**
+
+- The malignant are generally higher on the Z-axis (radius_worst) and have larger values on the X-axis ( concave.points_worst) and Y-axis (perimeter_worst).  
+
+- The Benign cluster closer to the lower values of all three axes.  
+
+- There is a strong correlation between the Radius Worst and perimeter_worst, as shown by the strong grouping along the diagonal.  
+
+- The plot suggests that Malignant tumors tend to have higher values for radius, perimeter, and concave points compared to benign tumors.
+
+
+
+
+# 6. Gradient Descent
+
+## 6.1 Normalize the Data
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+## 6.2 Train the Neural Network
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+**Key Metrics:**
+
+- weights: **161** 
+
+    *Weights from input layers to hidden layers (31×5=155) + Weights from hidden layers to output layer (5×1=5) + Biases* 
+
+- The initial value of the loss function at the beginning of the training process is **261.317771**, before any updates have been made to the weights.
+
+- The value of the loss function decreases as the number of iterations increases, showing that the model is improving over time.
+
+- After **90** iterations, the value of the loss function has stabilized at **41.983733**.
+
+- the term `converged` means that the model has found a solution where further iterations will not substantially improve the performance.
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+**Key Metrics:**
+
+- `30-5-1 network`: **30** input features (vaiables),**5** neurons in hidden layer (as specified by the size parameter in the nnet model), **1** output node because of our binary classification (Malignant/Benign).
+
+- With regard to our binary classification problems, `binary cross-entropy` is the suitable loss function.
+
+- regularization values (`decay`) is  **0.1** in order to prevent overfitting by penalizing large weights during training.
+
+- Weights:
+
+    -`b->h1` represents the bias weight for the first hidden node (h1) which is **-2.49**
+  
+    -`i1->h1`...`i30->h5 represent` the weights connecting variables to hiiden nodes
+  
+ - Weights show the strength of the connection between nodes. Positive weights increase the output of the neuron, while negative weights decrease it. Large absolute values imply stronger influence.  
+ 
+ - These weights determine the quality of the connection between nodes. Positive weights increase the output of the neuron, while negative weights decrease it. Large absolute values show stronger influence.
+  
+- The last few lines show the weights from the bias (`b`) and hidden nodes `(h1, h2, ..., h5)` to the output node `(o)`
+
+- <div id="custom-warning" style='padding:0.1em; background-color:#E9D8FD; color:#69337A'>
+  <span>
+    <p style='margin-top:1em; text-align:center'>
+      <b>What is Binary Cross-Entropy?</b>
+    </p>
+    <p style='margin-left:1em;'>
+      Binary cross-entropy is a loss function employed in binary classification problems where the target
+      variable has two possible outcomes (0 or 1). It evaluates the performance of a classification model
+      that outputs a probability between 0 and 1. The model aims to minimize this loss function during
+      training to enhance its predictive accuracy.
+
+      Binary Cross-Entropy (BCE) is defined as:
+
+      $BCE = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(p_i) + (1 - y_i) \log(1 - p_i) \right]$
+
+      where:
+
+      N: the number of observations  
+      yi: the actual binary label (0 or 1) of the i-th observation  
+      pi: the predicted probability of the i-th observation being in class 1  
+
+      By minimizing BCE, the model seeks to align its predicted probabilities with the true labels,
+      improving its classification performance.
+    </p>
+    <p style='margin-bottom:1em; margin-right:1em; text-align:right; font-family:Georgia'>
+      <b>- <a href="https://www.aporia.com/learn/understanding-binary-cross-entropy-and-log-loss-for-effective-model-monitoring/" target="_blank">Binary Cross-Entropy Documentation</a></b>
+    </p>
+  </span>
+</div>
+
+
+
+## 6.3 Forecasting and Validation
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+## 6.4 Model Summary
+
+
+```{r, class.output="bg-info"}
+  # Full implementation removed for privacy
+```
+
+
+## 6.5 Hyperparameter Tuning
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+**interpretation:**
+
+- The model was trained with **5** fold cross validation, with the data split , each **5** parts used for validation once, with approximately **319** samples per fold.  
+
+- Various combinations of neurons in hidden layer  **(3, 5 and 7)** and decay **(0.001, 0.01 and 0.1)** were tested. The best model with the highest ROC of **0.9926575 ** had **5** neurons and **0.1 decay**, with high sensitivity **(0.996)** and specificity **(0.94)**.  
+
+
+## 6.6 Visualizing the Results
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+## 6.7 Tuned Summary
+
+
+```{r, class.output="bg-info"}
+  # Full implementation removed for privacy
+```
+
+
+
+## 6.8 Loss Function Evolution 
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+**interpretation:**
+
+- In the first few epochs, both the training and testing loss drop significantly, the model is learning from the data. The model is minimizing the binary cross-entropy loss at the beginning of the training process.After **20-30** epochs, the training and testing loss curves flatten out, the network has converged and further training doesn’t improve the performance.
+
+- This means the model has learned most of what it can from the data in the first few epochs.The training loss (blue) is slightly lower than the testing loss (red). This is typical for a well trained but not overfitted model and The small gap between the two curves shows the model generalizes well on unseen data (test set), no major overfitting or underfitting is observed.
+
+
+
+
+## 6.9 GD vs. Tuned GD
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+
+```{r,echo=FALSE}
+  # Full implementation removed for privacy
+```
+
+
+
+
+> In order tp assess to similarity of result I check the standard deviation of ROC across folds and ROC scores plot for each fold
+
+
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+> The small standard deviation suggests that the model's performance is very consistent across different cross-validation folds. As a result, it indicates that the model is probably well-generalized to the data, and further tuning of the neural network's hyperparameters might not lead to major improvements in performance.
+
+
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+>
+it's clear that most of the folds have very high ROC scores (close to 1.0). Even though there are small differences between folds (Fold 1 and Fold 4 show slightly lower ROC scores), the overall performance across all folds is quite consistent.
+>
+>The low variance in the ROC scores across the folds confirms that your neural network model is performing consistently across the different subsets of the data. Since both the original and tuned neural network models show similar performance.
+>
+More complex architectures in keras or tensorflow which cause to add additional neurons, can lead to further performance gains.
+
+
+
+# 7. Model Evaluations
+
+```{r,echo=FALSE}
+  # Full implementation removed for privacy
+```
+
+
+
+>**NOTICE!**
+>
+>> Based on the checking the expected loss (e.g., accuracy or AUC) directly from the test set , the Tuned LR has the lowest Expected loss and is the best model , but If we only check the expected loss without applying cross-validation, we face a risk of selecting a model that might overfit or underfit the training data which gives us a biased or misleading estimation. Furhtehrmor, without validation we may face the data leakage, which means that we may unintentionally tune the model which uses the information from the test set. This can give an overestimation because the model has "seen" part of the test data in the process of selection.
+
+
+
+# 8. PCA
+
+> I applied **PCA** on the dataset's features before training models to minimize dimensionality and keep as much variance as feasible in order to increase performance, especially if certain features are highly correlated or the data has noise. by applying **PCA** and select enough principal components to explain 95% of the variance in the data models will bet hen performed on the modified dataset, and their performance will be compared to earlier results.
+
+## 8.1 Data Preparation
+
+
+```{r,results='hide'}
+  # Full implementation removed for privacy
+```
+
+
+
+## 8.2 Principal Components
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+**Interpretation:**
+
+The PCA biplot showing the variables in relation to the two most important principal components (PC1 and PC2).The x-axis represents PC1, which explains **45.4%** of the total variance in the dataset and the y-axis represents PC2, which explains **19.2%** of the total variance.
+
+  - Key information:
+
+    1- The **length** of the arrow reflects how strongly the variable contributes to the pricipal components. Longer arrows indicate stronger contributions.
+    
+    2- The **direction** of the arrow shows how the variable contributes to Dims 1 and 2. Variables closer to the plot's edges provide a larger contribution to the principal components.
+    
+    3- Arrows pointing in the same direction have a positive correlation, but those moving in opposite directions have a negative correlation.
+    
+    4- The **color** range on the right-hand side (from light blue to dark blue) shows how each variable contributes to the principal components.Variables with darker tones make a greater contribution to the principal components than those with lighter colors.
+
+
+
+## 8.3 Rerun models with PCA
+
+### 8.3.1 LR with PCA
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+### 8.3.2 Decision Tree with PCA
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+### 8.3.3 Random Forest Model
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+### 8.3.4 Neural Network Model
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```          
+
+
+
+## 8.4 With & Without PCA
+
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+>
+`Random Forest (RF)` performs the best overall in terms of accuracy, F1 score, and expected loss, suggesting it generalizes well.
+>
+PCA seems to generally reduce model performance across all models except for slight improvements in precision for a few cases.
+>
+For models like `Logistic Regression` and `Neural Networks`, applying PCA improve precision but at the cost of reduced recall. Since it can can lead to  more false negatives.
+>
+Models performed better without PCA.
+
+
+
+# 9. Model Selection
+
+> Cross-validation helps us understand how the model performs across different data splits, which gives a more accurate estimate of its expected loss (accuracy, AUC, etc.) on unseen data.
+>
+> In `k-fold` cross validation (here is **5**), the data is split into `k` folds. The model is trained on `k-1` folds and tested on the remaining fold. This is repeated `k` times (with each fold being the test set once) and the results are averaged to give a better performance estimate.
+
+## 9.1 Cross-Validation Without PCA
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+## 9.2 Cross-Validation with PCA
+
+
+```{r}
+  # Full implementation removed for privacy
+```
+
+
+
+> Best Model Without PCA:
+>
+>> The Neural Network and Tuned Logestic regression models are the top performers in without PCA, with the Neural Network has a slightly higher ROC and other sensitivity and specificity parameters that are equally high. They are both good options.
+>
+> Best Model With PCA:
+>
+>> Logistic Regression and the Neural Network are the top-performing models after applying PCA, with nearly perfect ROC scores and low variability.Random Forest is a close contender but is slightly less consistent.
+Decision Trees perform significantly worse, and may not be the best choice after applying PCA.
+>
+
+
