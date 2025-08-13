@@ -4,7 +4,7 @@ This project is part of my Statistical Machine Learning coursework.
 It analyzes **breast cancer diagnosis** using features extracted from cell nuclei in fine needle aspiration (FNA) images of breast masses.
 
 The repository contains:
-- **`report.html`** – A redacted HTML report where the code chunks show placeholders instead of full implementation; figures and outputs are not included.
+- **[`report`](https://tezamo.github.io/breast-cancer-sml-project/report.html)** – A redacted HTML report where the code chunks show placeholders instead of full implementation; figures and outputs are not included.
 - **`src/`** – Source code folder with function signatures and structure only; full code available upon request.
 - **Dataset description** – See below for feature explanations.
 
