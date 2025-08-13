@@ -1,6 +1,6 @@
 ---
-title: "Coursework SML"
-author: "Morteza Motegh"
+title: "breast cacncer sml project"
+author: "tezamo"
 output:
   html_document:
     fig_width: 10
