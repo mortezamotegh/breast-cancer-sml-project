@@ -57,16 +57,12 @@ For each feature, the dataset includes:
 
 ```markdown
 
-breast-cancer-sml-project/
-│
-├── src/                    # Source code 
-│   ├── data_preprocessing.py  # Script for data 
-│   ├── model_training.py      # Script for training
-│   └── evaluation.py          # Script for model evaluation and metrics
-│
-├── report.html             # report 
-├── README.md               # overview and setup
-└── requirements.txt        # Python dependencies 
+project_name/
+├── figures               # Plots and visual outputs
+├── report.html            # Analysis report (exported HTML)
+├── script.R               # Main R analysis script
+├── LICENSE                # License file
+└── README.md              # Project overview
 
 ```
 ---
