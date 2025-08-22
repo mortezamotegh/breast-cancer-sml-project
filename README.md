@@ -57,7 +57,7 @@ For each feature, the dataset includes:
 
 ```markdown
 
-project_name/
+Breast Cancer SML/
 ├── figures               # Plots and visual outputs
 ├── report.html            # Analysis report (exported HTML)
 ├── script.R               # Main R analysis script
