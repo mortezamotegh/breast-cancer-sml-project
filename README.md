@@ -5,7 +5,7 @@ It analyzes **breast cancer diagnosis** using features extracted from cell nucle
 
 The repository contains:
 - **`report.html`** – A redacted HTML report where the code chunks show placeholders instead of full implementation; figures and outputs are not included.
-- **`src/`** – Source code folder with function signatures and structure only; full code available upon request.
+- **`script`** – Source code folder with function signatures and structure only; full code available upon request.
 - **Dataset description** – See below for feature explanations
 - **Languages Used**
   - R
@@ -78,16 +78,11 @@ Breast Cancer SML/
    ```
 
 
-#### 2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
 
-#### 3. Run the analysis:
+
+#### 2. Run the analysis:
    ``` bash
-  python src/data_preprocessing.py
-  python src/model_training.py
-  python src/evaluation.py
+  rstudio script.r
    ```
 
 ## 📋View the Report
