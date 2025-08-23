@@ -23,7 +23,7 @@ It’s also called a *fine-needle biopsy*.
 FNA involves extracting cells, tissue, and sometimes fluids using a thin needle and syringe.  
 The collected sample is then prepared and analyzed — in this case, **microscopic images of the extracted cells are processed to calculate diagnostic features**.
 
-![Fine Needle Aspiration](images/fna.jpg)
+![Fine Needle Aspiration](figures/fna.jpg)
 
 The dataset contains measurements from **fine-needle aspiration (FNA)** images of breast mass cell nuclei.  
 It is widely used in machine learning research to develop models that can distinguish between **benign** (non-cancerous) and **malignant** (cancerous) tumors.  
